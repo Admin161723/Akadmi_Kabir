@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akadmi Kabir | آکادمی کبیر</title>
+    <link rel="icon" href="InShot_20260621_171236189.png">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; }
+        
+        :root {
+            --space-blue: #0ea5e9;
+            --space-purple: #8b5cf6;
+            --space-pink: #ec4899;
+            --space-cyan: #06b6d4;
+            --space-gold: #fbbf24;
+            --dark: #030712;
+            --card: rgba(15, 23, 42, 0.7);
+            --border: rgba(139, 92, 246, 0.25);
+            --text: #e0e7ff;
+            --text-dim: #94a3b8;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, #0f172a 0%, #030712 100%);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #preloader.hide {            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-logo-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .loader-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--dark), var(--dark)) padding-box,
+                        linear-gradient(135deg, var(--space-cyan), var(--space-pink)) border-box;
+            box-shadow: 
+                0 0 40px var(--space-purple),
+                0 0 80px rgba(139, 92, 246, 0.5);
+            animation: logoPulse 2s ease-in-out infinite;
+        }
+
+        .loader-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px; height: 150px;
+            border: 2px solid transparent;
+            border-top-color: var(--space-cyan);
+            border-right-color: var(--space-pink);
+            border-radius: 50%;
+            animation: ringSpin 2s linear infinite;
+        }
+
+        .loader-ring::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 2px solid transparent;
+            border-bottom-color: var(--space-gold);
+            border-left-color: var(--space-purple);
+            border-radius: 50%;
+            animation: ringSpin 3s linear infinite reverse;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes ringSpin {
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .loader-title {
+            font-size: 1.6em;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--space-cyan), var(--space-purple), var(--space-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .loader-bar {
+            width: 240px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-bar-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--space-cyan), var(--space-purple), var(--space-pink));
+            border-radius: 10px;
+            box-shadow: 0 0 20px var(--space-purple);
+            animation: loadFill 3s ease-out forwards;
+        }
+
+        @keyframes loadFill {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        .loader-percent {
+            margin-top: 15px;
+            color: var(--text-dim);
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        /* ===== BACKGROUND ===== */
+        .bg-layer {
+            position: fixed;
+            inset: 0;            z-index: -10;
+            pointer-events: none;
+        }
+
+        .bg-image {
+            background: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=1920&q=80') center/cover no-repeat fixed;
+            filter: brightness(0.2) saturate(1.3);
+        }
+
+        .bg-gradient {
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 80% 60%, rgba(236, 72, 153, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.25) 0%, transparent 50%);
+        }
+
+        .stars {
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+                radial-gradient(1px 1px at 40px 70px, var(--space-cyan), transparent),
+                radial-gradient(1px 1px at 90px 40px, var(--space-pink), transparent),
+                radial-gradient(2px 2px at 130px 80px, #fff, transparent),
+                radial-gradient(1px 1px at 160px 120px, var(--space-purple), transparent);
+            background-size: 200px 200px;
+            animation: starsMove 100s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes starsMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 200px; }
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(3, 7, 18, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .header.scrolled {            padding: 8px 20px;
+            background: rgba(3, 7, 18, 0.95);
+            box-shadow: 0 5px 30px rgba(139, 92, 246, 0.15);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo img {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--space-purple);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+
+        .header-logo span {
+            font-weight: 900;
+            font-size: 1.1em;
+            background: linear-gradient(90deg, var(--space-cyan), var(--space-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .menu-btn, .user-btn {
+            width: 42px; height: 42px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--space-purple);
+            font-size: 1.2em;
+            transition: all 0.3s;
+        }
+
+        .menu-btn:hover, .user-btn:hover {
+            background: rgba(139, 92, 246, 0.2);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        /* ===== SIDEBAR ===== */
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0; right: -300px;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(3, 7, 18, 0.98));
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border);
+            z-index: 1600;
+            padding: 20px;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+        }
+
+        .sidebar.active { right: 0; }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header img {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--space-purple);
+        }
+
+        .sidebar-header h4 {            font-size: 1.05em;
+            background: linear-gradient(90deg, var(--space-cyan), var(--space-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sidebar-header p {
+            font-size: 0.85em;
+            color: var(--text-dim);
+        }
+
+        .sidebar-menu { list-style: none; }
+
+        .sidebar-menu li { margin-bottom: 6px; }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--space-cyan);
+            transform: translateX(-5px);
+        }
+
+        .sidebar-menu a i {
+            width: 20px;
+            text-align: center;
+            color: var(--space-purple);
+        }
+
+        .sidebar-close {
+            position: absolute;
+            top: 15px; left: 15px;
+            width: 36px; height: 36px;
+            background: rgba(236, 72, 153, 0.15);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;            justify-content: center;
+            cursor: pointer;
+            color: var(--space-pink);
+            transition: all 0.3s;
+        }
+
+        .sidebar-close:hover {
+            background: var(--space-pink);
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 60px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            color: var(--space-purple);
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .hero h1 {            font-size: clamp(2.5em, 8vw, 5em);
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--space-cyan) 0%, var(--space-purple) 50%, var(--space-pink) 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            display: inline-block;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.05em;
+            color: var(--text-dim);
+            max-width: 650px;
+            margin: 0 auto 35px;
+            line-height: 2;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            font-size: 1em;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--space-cyan), var(--space-purple));
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.6), 0 0 40px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: var(--space-purple);
+            transform: translateY(-4px);
+        }
+
+        .btn-soon {
+            background: linear-gradient(135deg, var(--space-gold), #f59e0b);
+            color: #000;
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-soon::before {
+            content: 'به زودی';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: top 0.3s;
+        }
+
+        .btn-soon:hover::before {
+            top: 0;
+        }
+        .btn-soon:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.6);
+        }
+
+        /* ===== STATS ===== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            max-width: 650px;
+            width: 100%;
+        }
+
+        .stat-card {
+            background: var(--card);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--space-purple);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
+        }
+
+        .stat-card i {
+            font-size: 1.6em;
+            background: linear-gradient(135deg, var(--space-cyan), var(--space-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.6em;
+            font-weight: 900;
+            color: #fff;
+            font-family: monospace;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: var(--text-dim);            margin-top: 4px;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section { padding: 70px 0; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8em;
+            color: var(--space-purple);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8em, 5vw, 2.8em);
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(90deg, #fff, var(--space-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-desc {
+            color: var(--text-dim);
+            font-size: 1em;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== ACCOUNT SECTION ===== */
+        .account-container {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .account-card {
+            background: var(--card);            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .account-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--space-cyan), var(--space-pink));
+        }
+
+        .account-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: rgba(0,0,0,0.3);
+            padding: 5px;
+            border-radius: 12px;
+        }
+
+        .account-tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .account-tab.active {
+            background: linear-gradient(135deg, var(--space-cyan), var(--space-purple));
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .account-form {
+            display: none;
+        }
+
+        .account-form.active {
+            display: block;            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1em;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--space-cyan);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--space-cyan), var(--space-pink));
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1em;            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            margin-top: 10px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        /* ===== FACTIONS ===== */
+        .factions-wrap { padding: 20px 0 50px; }
+
+        .faction-card {
+            width: 260px;
+            height: 380px;
+            background: var(--card);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .swiper-slide-active .faction-card {
+            border-color: var(--space-purple);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.3), 0 0 30px rgba(236, 72, 153, 0.2);
+            transform: scale(1.05);
+        }
+
+        .faction-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .faction-body {
+            padding: 18px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 160px;
+        }
+
+        .faction-type {            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .type-gov { background: rgba(6, 182, 212, 0.2); color: var(--space-cyan); border: 1px solid var(--space-cyan); }
+        .type-mafia { background: rgba(236, 72, 153, 0.2); color: var(--space-pink); border: 1px solid var(--space-pink); }
+        .type-gang { background: rgba(251, 191, 36, 0.2); color: var(--space-gold); border: 1px solid var(--space-gold); }
+
+        .faction-name {
+            font-size: 1.3em;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .swiper-pagination-bullet {
+            background: #666;
+            opacity: 0.5;
+            width: 10px; height: 10px;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: linear-gradient(90deg, var(--space-cyan), var(--space-pink));
+            opacity: 1;
+            width: 25px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px var(--space-purple);
+        }
+
+        /* ===== GUIDE ===== */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 18px;
+        }
+
+        .guide-card {
+            background: var(--card);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px 22px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        .guide-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--space-cyan), var(--space-pink));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .guide-card:hover {
+            border-color: var(--space-purple);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.2);
+        }
+
+        .guide-card:hover::before { opacity: 1; }
+
+        .guide-card-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .guide-icon {
+            width: 46px; height: 46px;
+            background: linear-gradient(135deg, var(--space-cyan), var(--space-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.15em;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .guide-card-head h3 {
+            font-size: 1.15em;
+            font-weight: 900;
+        }
+
+        .guide-list { list-style: none; }
+
+        .guide-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;            margin-bottom: 10px;
+            color: var(--text-dim);
+            font-size: 0.9em;
+            line-height: 1.7;
+        }
+
+        .guide-list li i {
+            color: var(--space-cyan);
+            margin-top: 5px;
+            font-size: 0.5em;
+            flex-shrink: 0;
+        }
+
+        .cmd {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--space-purple);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.85em;
+            direction: ltr;
+            display: inline-block;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        /* ===== VIDEO ===== */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 18px;
+        }
+
+        .video-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .video-card:hover {
+            border-color: var(--space-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .video-wrap {
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+        .video-wrap video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-title {
+            padding: 14px;
+            text-align: center;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .video-title i { color: var(--space-pink); }
+
+        /* ===== TEAM ===== */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px 20px;
+            text-align: center;
+            transition: all 0.4s;
+            cursor: pointer;
+            backdrop-filter: blur(15px);
+        }
+
+        .team-card:hover {
+            border-color: var(--space-pink);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(236, 72, 153, 0.2);
+        }
+
+        .team-avatar {
+            width: 110px; height: 110px;
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            overflow: hidden;            border: 3px solid transparent;
+            background: linear-gradient(var(--dark), var(--dark)) padding-box,
+                        linear-gradient(135deg, var(--space-cyan), var(--space-pink)) border-box;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .team-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .team-card:hover .team-avatar img { transform: scale(1.1); }
+
+        .team-name {
+            font-size: 1.3em;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: var(--space-pink);
+            font-size: 0.85em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ===== SOCIAL ===== */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .social-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s;
+            backdrop-filter: blur(15px);
+        }
+        .social-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--space-cyan);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2);
+        }
+
+        .social-icon {
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+            flex-shrink: 0;
+        }
+
+        /* YouTube */
+        .social-yt .social-icon { 
+            background: rgba(255, 0, 0, 0.15); 
+            color: #ff0000; 
+            border: 1px solid rgba(255, 0, 0, 0.3); 
+        }
+        .social-yt:hover {
+            border-color: #ff0000;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+        }
+        .social-yt:hover .social-icon { 
+            background: #ff0000; 
+            color: #fff; 
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+        }
+
+        /* Instagram */
+        .social-ig .social-icon { 
+            background: linear-gradient(135deg, rgba(240, 214, 62, 0.15), rgba(188, 42, 141, 0.15), rgba(96, 62, 180, 0.15));
+            color: #e1306c; 
+            border: 1px solid rgba(225, 48, 108, 0.3); 
+        }
+        .social-ig:hover {
+            border-color: #e1306c;
+            box-shadow: 0 10px 30px rgba(225, 48, 108, 0.3);
+        }
+        .social-ig:hover .social-icon { 
+            background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: #fff; 
+            box-shadow: 0 0 25px rgba(225, 48, 108, 0.5);
+        }
+
+        /* Rubika */        .social-rb .social-icon { 
+            background: linear-gradient(135deg, rgba(255, 109, 0, 0.15), rgba(213, 0, 249, 0.15)); 
+            color: #d500f9; 
+            border: 1px solid rgba(213, 0, 249, 0.3); 
+        }
+        .social-rb:hover {
+            border-color: #d500f9;
+            box-shadow: 0 10px 30px rgba(213, 0, 249, 0.3);
+        }
+        .social-rb:hover .social-icon { 
+            background: linear-gradient(135deg, #ff6d00, #d500f9); 
+            color: #fff; 
+            box-shadow: 0 0 25px rgba(213, 0, 249, 0.5);
+        }
+
+        .social-info h4 { font-size: 1em; margin-bottom: 3px; }
+        .social-info p { font-size: 0.8em; color: var(--text-dim); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: rgba(3, 7, 18, 0.95);
+            border-top: 1px solid var(--border);
+            padding: 50px 20px 90px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-brand img {
+            width: 65px; height: 65px;
+            border-radius: 50%;
+            border: 2px solid var(--space-purple);
+            margin-bottom: 15px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.2em;
+            background: linear-gradient(90deg, var(--space-cyan), var(--space-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        .footer-brand p {
+            color: var(--text-dim);
+            font-size: 0.9em;
+            line-height: 1.8;
+        }
+
+        .footer-section h4 {
+            color: #fff;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--space-purple);
+            display: inline-block;
+        }
+
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .footer-links a:hover {
+            color: var(--space-cyan);
+            transform: translateX(-5px);
+        }
+
+        .footer-links a i {
+            color: var(--space-purple);
+            font-size: 0.7em;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: var(--text-dim);
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .footer-contact i {            color: var(--space-cyan);
+            margin-top: 3px;
+            width: 16px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85em;
+        }
+
+        /* ===== BOTTOM NAV ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(3, 7, 18, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 999;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 6px 12px;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-item i {
+            font-size: 1.2em;
+            transition: all 0.3s;
+        }
+
+        .nav-item span {
+            font-size: 0.65em;
+            font-weight: 700;
+        }
+
+        .nav-item.active {            color: var(--space-cyan);
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 30px; height: 3px;
+            background: linear-gradient(90deg, var(--space-cyan), var(--space-pink));
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 0 10px var(--space-purple);
+        }
+
+        .nav-item.active i {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 8px var(--space-cyan));
+        }
+
+        /* ===== FAB ===== */
+        .fab {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            width: 54px; height: 54px;
+            background: linear-gradient(135deg, var(--space-cyan), var(--space-pink));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.3em;
+            cursor: pointer;
+            border: none;
+            z-index: 998;
+            box-shadow: 0 5px 25px rgba(139, 92, 246, 0.5);
+            transition: all 0.3s;
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 10px 35px rgba(139, 92, 246, 0.7);
+        }
+
+        /* ===== MODAL ===== */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            z-index: 2000;            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(3, 7, 18, 0.98));
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            padding: 40px 28px;
+            text-align: center;
+            transform: scale(0.9);
+            transition: all 0.4s;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal.active .modal-box { transform: scale(1); }
+
+        .modal-close {
+            position: absolute;
+            top: 15px; left: 15px;
+            width: 36px; height: 36px;
+            background: rgba(236, 72, 153, 0.15);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--space-pink);
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--space-pink);
+            color: #fff;
+            transform: rotate(90deg);        }
+
+        .modal-avatar {
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            overflow: hidden;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--dark), var(--dark)) padding-box,
+                        linear-gradient(135deg, var(--space-cyan), var(--space-pink)) border-box;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .modal-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-title {
+            font-size: 1.7em;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .modal-role {
+            color: var(--space-pink);
+            font-size: 0.85em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .modal-desc {
+            color: var(--text-dim);
+            font-size: 0.95em;
+            line-height: 2;
+            text-align: justify;
+        }
+
+        /* ===== REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--space-cyan), var(--space-pink));
+            border-radius: 10px;
+        }
+
+        ::selection { background: var(--space-purple); color: #fff; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5em; }
+            .hero p { font-size: 0.95em; }
+            .btn { width: 100%; justify-content: center; }
+            .hero-buttons { flex-direction: column; width: 100%; max-width: 300px; }
+            .stats { grid-template-columns: repeat(3, 1fr); }
+            .guide-grid, .video-grid, .team-grid, .social-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .nav-item span { font-size: 0.6em; }
+            .nav-item i { font-size: 1.1em; }
+            .account-card { padding: 30px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 80px 15px 40px; }
+            .section { padding: 50px 0; }
+            .stats { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-logo-container">
+            <div class="loader-ring"></div>
+            <img src="InShot_20260621_171236189.png" alt="Logo" class="loader-logo">
+        </div>
+        <div class="loader-title">Akadmi Kabir</div>
+        <div class="loader-bar">
+            <div class="loader-bar-fill"></div>
+        </div>
+        <div class="loader-percent" id="loadPercent">0%</div>
+    </div>
+
+    <!-- Backgrounds -->
+    <div class="bg-layer bg-image"></div>    <div class="bg-layer bg-gradient"></div>
+    <div class="bg-layer stars"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-logo">
+            <img src="InShot_20260621_171236189.png" alt="Logo">
+            <span>Akadmi Kabir</span>
+        </div>
+        <div class="header-actions">
+            <div class="user-btn" onclick="scrollToAccount()">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="menu-btn" id="menuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-close" id="sidebarClose">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="sidebar-header">
+            <img src="InShot_20260621_171236189.png" alt="Profile">
+            <div>
+                <h4>آکادمی کبیر</h4>
+                <p>خوش اومدی 👋</p>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#home" class="active"><i class="fa-solid fa-house"></i> خانه</a></li>
+            <li><a href="#account"><i class="fa-solid fa-user"></i> حساب کاربری</a></li>
+            <li><a href="#factions"><i class="fa-solid fa-users"></i> فکشن‌ها</a></li>
+            <li><a href="#guide"><i class="fa-solid fa-book"></i> راهنما</a></li>
+            <li><a href="#media"><i class="fa-solid fa-video"></i> رسانه</a></li>
+            <li><a href="#team"><i class="fa-solid fa-user-tie"></i> تیم</a></li>
+            <li><a href="#social"><i class="fa-solid fa-share-nodes"></i> شبکه‌ها</a></li>
+            <li><a href="rules"><i class="fa-solid fa-scale-balanced"></i> قوانین</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main -->
+    <main>
+        <!-- Hero -->
+        <section class="hero" id="home">
+            <div class="hero-badge reveal">
+                <i class="fa-solid fa-rocket"></i>                <span>خانواده بزرگ گیمرها</span>
+            </div>
+
+            <h1 class="reveal">
+                <span class="gradient-text">استادیو کبیر</span><br>
+                <span class="gradient-text">Akadmi Kabir</span>
+            </h1>
+
+            <p class="reveal">
+                سلام! به بزرگ‌ترین خانواده رول‌پلی ایران خوش اومدی. آکادمی کبیر یه تیم قدرتمند از پلیرهای حرفه‌ایه که از سال ۱۴۰۵ شروع به کار کرده. اینجا با هم بازی می‌کنیم، می‌خندیم و خاطره می‌سازیم!
+            </p>
+
+            <div class="hero-buttons reveal">
+                <a href="#account" class="btn btn-primary">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>ایجاد حساب</span>
+                </a>
+                <a href="#" class="btn btn-soon" id="dlBtn">
+                    <i class="fa-brands fa-android"></i>
+                    <span>دانلود لانچر</span>
+                </a>
+                <a href="#guide" class="btn btn-secondary">
+                    <i class="fa-solid fa-play"></i>
+                    <span>شروع بازی</span>
+                </a>
+            </div>
+
+            <div class="stats reveal">
+                <div class="stat-card">
+                    <i class="fa-solid fa-users"></i>
+                    <div class="stat-value" data-target="2847">0</div>
+                    <div class="stat-label">اعضای فعال</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <div class="stat-value" data-target="15420">0</div>
+                    <div class="stat-label">ساعت بازی</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-trophy"></i>
+                    <div class="stat-value" data-target="128">0</div>
+                    <div class="stat-label">مسابقات</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Section -->
+        <section class="section" id="account">
+            <div class="container">
+                <div class="section-header reveal">                    <div class="section-tag">
+                        <i class="fa-solid fa-user"></i>
+                        <span>حساب کاربری</span>
+                    </div>
+                    <h2 class="section-title">ورود / ثبت‌نام</h2>
+                    <p class="section-desc">به خانواده آکادمی کبیر بپیوند!</p>
+                </div>
+
+                <div class="account-container reveal">
+                    <div class="account-card">
+                        <div class="account-tabs">
+                            <button class="account-tab active" onclick="switchTab('login')">ورود</button>
+                            <button class="account-tab" onclick="switchTab('register')">ثبت‌نام</button>
+                        </div>
+
+                        <!-- Login Form -->
+                        <form class="account-form active" id="loginForm">
+                            <div class="form-group">
+                                <label>نام کاربری</label>
+                                <input type="text" class="form-input" placeholder="نام کاربری خود را وارد کنید" required>
+                            </div>
+                            <div class="form-group">
+                                <label>رمز عبور</label>
+                                <input type="password" class="form-input" placeholder="رمز عبور خود را وارد کنید" required>
+                            </div>
+                            <button type="submit" class="form-submit">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                ورود به حساب
+                            </button>
+                        </form>
+
+                        <!-- Register Form -->
+                        <form class="account-form" id="registerForm">
+                            <div class="form-group">
+                                <label>نام کاربری</label>
+                                <input type="text" class="form-input" placeholder="نام کاربری دلخواه" required>
+                            </div>
+                            <div class="form-group">
+                                <label>ایمیل</label>
+                                <input type="email" class="form-input" placeholder="example@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>رمز عبور</label>
+                                <input type="password" class="form-input" placeholder="حداقل 8 کاراکتر" required>
+                            </div>
+                            <div class="form-group">
+                                <label>تکرار رمز عبور</label>
+                                <input type="password" class="form-input" placeholder="تکرار رمز عبور" required>
+                            </div>
+                            <button type="submit" class="form-submit">                                <i class="fa-solid fa-user-plus"></i>
+                                ایجاد حساب کاربری
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Guide -->
+        <section class="section" id="guide">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-tag">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>راهنما</span>
+                    </div>
+                    <h2 class="section-title">شروع سریع بازی</h2>
+                    <p class="section-desc">همه چیزی که برای شروع نیاز داری!</p>
+                </div>
+
+                <div class="guide-grid">
+                    <div class="guide-card reveal">
+                        <div class="guide-card-head">
+                            <div class="guide-icon"><i class="fa-solid fa-right-to-bracket"></i></div>
+                            <h3>ورود و ثبت‌نام</h3>
+                        </div>
+                        <ul class="guide-list">
+                            <li><i class="fa-solid fa-circle"></i> نام RP خود را وارد کنید</li>
+                            <li><i class="fa-solid fa-circle"></i> رمز عبور قوی انتخاب کنید</li>
+                            <li><i class="fa-solid fa-circle"></i> ایمیل معتبر ثبت کنید</li>
+                            <li><i class="fa-solid fa-circle"></i> شماره موبایل و کد تایید</li>
+                        </ul>
+                    </div>
+
+                    <div class="guide-card reveal">
+                        <div class="guide-card-head">
+                            <div class="guide-icon"><i class="fa-solid fa-terminal"></i></div>
+                            <h3>دستورات مهم</h3>
+                        </div>                        <ul class="guide-list">
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Mm</span> پنل اصلی</li>
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Report</span> گزارش</li>
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Gps</span> مسیریابی</li>
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Pass</span> پاسپورت</li>
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Quest</span> ماموریت</li>
+                        </ul>
+                    </div>
+
+                    <div class="guide-card reveal">
+                        <div class="guide-card-head">
+                            <div class="guide-icon"><i class="fa-solid fa-wallet"></i></div>
+                            <h3>مدیریت دارایی</h3>
+                        </div>
+                        <ul class="guide-list">
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Cars</span> خودروها</li>
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Home</span> خانه</li>
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Bizmenu</span> بیزنس</li>
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Bank</span> حساب بانکی</li>
+                        </ul>
+                    </div>
+
+                    <div class="guide-card reveal">
+                        <div class="guide-card-head">
+                            <div class="guide-icon"><i class="fa-solid fa-users-gear"></i></div>
+                            <h3>فکشن‌ها</h3>
+                        </div>
+                        <ul class="guide-list">
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Leaders</span> لیدرها</li>
+                            <li><i class="fa-solid fa-circle"></i> <span class="cmd">/Zams</span> ساب‌لیدرها</li>
+                            <li><i class="fa-solid fa-circle"></i> <b style="color: var(--space-cyan);">نکته:</b> از Army شروع کنید</li>
+                        </ul>
+                    </div>
+
+                    <div class="guide-card reveal">
+                        <div class="guide-card-head">
+                            <div class="guide-icon"><i class="fa-solid fa-city"></i></div>
+                            <h3>اماکن مهم</h3>
+                        </div>
+                        <ul class="guide-list">
+                            <li><i class="fa-solid fa-circle"></i> <b>شهرداری:</b> پاسپورت و شغل</li>
+                            <li><i class="fa-solid fa-circle"></i> <b>مدیک:</b> کارت سلامت</li>
+                            <li><i class="fa-solid fa-circle"></i> <b>پلیس:</b> ترخیص خودرو</li>
+                            <li><i class="fa-solid fa-circle"></i> <b>ATM:</b> انتقال پول</li>
+                        </ul>
+                    </div>
+
+                    <div class="guide-card reveal">
+                        <div class="guide-card-head">
+                            <div class="guide-icon"><i class="fa-solid fa-scale-balanced"></i></div>                            <h3>قوانین</h3>
+                        </div>
+                        <ul class="guide-list">
+                            <li><i class="fa-solid fa-circle"></i> شکایت با مدرک کامل</li>
+                            <li><i class="fa-solid fa-circle"></i> مهلت: ۴۸ ساعت</li>
+                            <li><i class="fa-solid fa-circle"></i> <b style="color: var(--space-cyan);">بازی منصفانه!</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media -->
+        <section class="section" id="media">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-tag">
+                        <i class="fa-solid fa-video"></i>
+                        <span>رسانه</span>
+                    </div>
+                    <h2 class="section-title">ویدیوهای آموزشی</h2>
+                    <p class="section-desc">با این ویدیوها سریع‌تر حرفه‌ای شو!</p>
+                </div>
+
+                <div class="video-grid">
+                    <div class="video-card reveal">
+                        <div class="video-wrap">
+                            <video controls preload="metadata">
+                                <source src="" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-title">
+                            <i class="fa-solid fa-film"></i>
+                            تریلر رسمی سرور
+                        </div>
+                    </div>
+
+                    <div class="video-card reveal">
+                        <div class="video-wrap">
+                            <video controls preload="metadata">
+                                <source src=""type ="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-title">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            آموزش ثبت‌نام
+                        </div>
+                    </div>
+
+                    <div class="video-card reveal">                        <div class="video-wrap">
+                            <video controls preload="metadata">
+                                <source src="لینک_ویدیو" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-title">
+                            <i class="fa-solid fa-crosshairs"></i>
+                            آموزش فکشن‌ها
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team -->
+        <section class="section" id="team">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-tag">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <span>تیم ما</span>
+                    </div>
+                    <h2 class="section-title">تیم مدیریت</h2>
+                    <p class="section-desc">افرادی که برای بهترین تجربه تلاش می‌کنند</p>
+                </div>
+
+                <div class="team-grid">
+                    <div class="team-card reveal" onclick="openModal('ownerModal')">
+                        <div class="team-avatar">
+                            <img src="IMG_20260621_203725_896.jpg" alt="Daddy_Staff">
+                        </div>
+                        <h3 class="team-name">Kabir</h3>
+                        <p class="team-role">Owner Server</p>
+                    </div>
+
+                    <div class="team-card reveal" onclick="openModal('managerModal')">
+                        <div class="team-avatar">
+                            <img src="IMG_20260604_121321_109.jpg" alt="Mr.Miti">
+                        </div>
+                        <h3 class="team-name">Mr.Miti</h3>
+                        <p class="team-role">Manager Server</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social -->
+        <section class="section" id="social">
+            <div class="container">
+                <div class="section-header reveal">                    <div class="section-tag">
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <span>شبکه‌ها</span>
+                    </div>
+                    <h2 class="section-title">به ما بپیوند</h2>
+                    <p class="section-desc">در شبکه‌های اجتماعی دنبال کن!</p>
+                </div>
+
+                <div class="social-grid">
+                    <a href="https://www.youtube.com/@AkadmiKabir" target="_blank" class="social-card social-yt reveal">
+                        <div class="social-icon"><i class="fa-brands fa-youtube"></i></div>
+                        <div class="social-info">
+                            <h4>یوتیوب</h4>
+                            <p>کانال رسمی</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.youtube.com/@AkadmiKabir" target="_blank" class="social-card social-ig reveal">
+                        <div class="social-icon"><i class="fa-brands fa-instagram"></i></div>
+                        <div class="social-info">
+                            <h4>اینستاگرام</h4>
+                            <p>صفحه رسمی</p>
+                        </div>
+                    </a>
+
+                    <a href="https://rubika.ir/joing/+JHJCJCFE0DAJYMMUFEPEZBKYGDCWELWT" target="_blank" class="social-card social-rb reveal">
+                        <div class="social-icon"><i class="fa-solid fa-fire"></i></div>
+                        <div class="social-info">
+                            <h4>روبیکا</h4>
+                            <p>کانال رسمی</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="InShot_20260621_171236189.png" alt="Logo">
+                <h3>آکادمی کبیر</h3>
+                <p>بزرگ‌ترین خانواده رول‌پلی ایران. از سال ۱۴۰۵ با افتخار در کنار گیمرهای حرفه‌ای.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>دسترسی سریع</h4>
+                <ul class="footer-links">
+                    <li><a href="#home"><i class="fa-solid fa-chevron-left"></i> خانه</a></li>                    <li><a href="#account"><i class="fa-solid fa-chevron-left"></i> حساب کاربری</a></li>
+                    <li><a href="#factions"><i class="fa-solid fa-chevron-left"></i> فکشن‌ها</a></li>
+                    <li><a href="#guide"><i class="fa-solid fa-chevron-left"></i> راهنما</a></li>
+                    <li><a href="rules"><i class="fa-solid fa-chevron-left"></i> قوانین</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-contact">
+                <h4>تماس با ما</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Iran</p>
+                <p><i class="fa-solid fa-phone"></i> <span style="direction:ltr;display:inline-block;">021</span></p>
+                <p><i class="fa-solid fa-envelope"></i> st16172365@gamil.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>©آکادمی کبیر</p>
+        </div>
+    </footer>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+        <a href="#home" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>خانه</span>
+        </a>
+        <a href="#account" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>حساب</span>
+        </a>
+        <a href="#factions" class="nav-item">
+            <i class="fa-solid fa-users"></i>
+            <span>فکشن</span>
+        </a>
+        <a href="#guide" class="nav-item">
+            <i class="fa-solid fa-book"></i>
+            <span>راهنما</span>
+        </a>
+        <a href="#media" class="nav-item">
+            <i class="fa-solid fa-video"></i>
+            <span>رسانه</span>
+        </a>
+    </nav>
+
+    <!-- FAB -->
+    <button class="fab" onclick="window.open('https://www.youtube.com/@AkadmiKabir','_blank')">
+        <i class="fa-brands fa-youtube"></i>
+    </button>
+
+    <!-- Modals -->    <div class="modal" id="ownerModal">
+        <div class="modal-box">
+            <div class="modal-close" onclick="closeModal('ownerModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="modal-avatar">
+                <img src="IMG_20260621_203725_896.jpg" alt="Kabir">
+            </div>
+            <h3 class="modal-title">Kabir</h3>
+            <p class="modal-role">Owner Server</p>
+            <p class="modal-desc">
+            سلام اسم من کبیر هست کبیر یک سرور باحال هست درحال ساخته شودن می باشد و ما گروه داریم پیش هم دیگر خوشحال هستیم و مثل یک خانواده هستیم قدرتمند
+            </p>
+        </div>
+    </div>
+
+    <div class="modal" id="managerModal">
+        <div class="modal-box">
+            <div class="modal-close" onclick="closeModal('managerModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="modal-avatar">
+                <img src="IMG_20260604_121321_109.jpg" alt="Mr.Miti">
+            </div>
+            <h3 class="modal-title">Mr.Miti</h3>
+            <p class="modal-role">Manager & Developer</p>
+            <p class="modal-desc">
+            درود من Mr.Miti هستم
+            من یک برنامه نوبس و توسعه چند ها بازی د برنامه هستم و سرور ها پایگاه داده که سرور کبیر قرار ما به سازیم سرور کبیر یکی از بهترین سرور ها هست منتظر شما هستیم داریم می سازیم
+            </p>
+        </div>
+    </div>
+
+    <script src="://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // ===== PRELOADER 3 SECONDS =====
+        let percent = 0;
+        const percentEl = document.getElementById('loadPercent');
+        const percentInterval = setInterval(() => {
+            percent += Math.random() * 5 + 2;
+            if (percent >= 100) {
+                percent = 100;
+                clearInterval(percentInterval);
+            }
+            percentEl.textContent = Math.floor(percent) + '%';
+        }, 80);
+
+        setTimeout(() => {
+            document.getElementById('preloader').classList.add('hide');
+            document.body.style.overflow = 'auto';
+        }, 3000);
+        // ===== HEADER SCROLL =====
+        window.addEventListener('scroll', () => {
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        // ===== SIDEBAR =====
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        
+        document.getElementById('menuBtn').onclick = () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        };
+        
+        const closeSidebar = () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        };
+        
+        document.getElementById('sidebarClose').onclick = closeSidebar;
+        overlay.onclick = closeSidebar;
+        
+        document.querySelectorAll('.sidebar-menu a').forEach(a => {
+            a.onclick = closeSidebar;
+        });
+
+        // ===== ACCOUNT TABS =====
+        function switchTab(tab) {
+            document.querySelectorAll('.account-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.account-form').forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.querySelectorAll('.account-tab')[0].classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
+            } else {
+                document.querySelectorAll('.account-tab')[1].classList.add('active');
+                document.getElementById('registerForm').classList.add('active');
+            }
+        }
+
+        function scrollToAccount() {
+            document.getElementById('account').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Form submissions
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('✅ با موفقیت وارد شدید!');
+        });
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('✅ حساب کاربری شما ایجاد شد!');
+        });
+
+        // ===== REVEAL ON SCROLL =====
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ===== COUNTER ANIMATION =====
+        function animateCounter(el, target) {
+            let current = 0;
+            const increment = target / 80;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.textContent = target.toLocaleString('fa-IR');
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current).toLocaleString('fa-IR');
+                }
+            }, 25);
+        }
+
+        setTimeout(() => {
+            document.querySelectorAll('.stat-value').forEach(el => {
+                animateCounter(el, parseInt(el.dataset.target));
+            });
+        }, 3200);
+
+        // ===== SWIPER =====
+        new Swiper('.factions-wrap', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            loop: true,
+            autoplay: { delay: 2500, disableOnInteraction: false },
+            coverflowEffect: {
+                rotate: 15,
+                stretch: 0,
+                depth: 180,
+                modifier: 1,
+                slideShadows: false,            },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: {
+                320: { slidesPerView: 1.3 },
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            }
+        });
+
+        // ===== BOTTOM NAV =====
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navItems.forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 150) {
+                    current = section.id;
+                }
+            });
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        }, { passive: true });
+
+        // ===== MODAL =====
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        document.querySelectorAll('.modal').forEach(m => {
+            m.addEventListener('click', (e) => {
+                if (e.target === m) {
+                    m.classList.remove('active');                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // ===== DOWNLOAD BUTTON =====
+        document.getElementById('dlBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('🚀 لانچر به زودی منتشر میشه! صبور باش...');
+        });
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
